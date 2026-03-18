@@ -32,12 +32,13 @@ def parse_guess(raw: str):
 def check_guess(guess, secret):
     if guess == secret:
         return "Win", "🎉 Correct!"
-
-    try:
-        if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
-        else:
-            return "Too Low", "📉 Go LOWER!"
+    # FIXME: Logic breaks here 
+    # FIXME: Hint directions were reversed in the original AI-generated logic.
+    # FIX: Corrected high/low hint messages and simplified comparison logic.
+    if guess > secret:
+        return "Too High", "📉 Go LOWER!"
+    else:
+        return "Too Low", "📈 Go HIGHER!"
     except TypeError:
         g = str(guess)
         if g == secret:
@@ -91,9 +92,9 @@ st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 
 if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
-
+# FIXME: Logic breaks here 
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
     st.session_state.score = 0
